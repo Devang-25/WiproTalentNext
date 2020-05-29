@@ -1,5 +1,7 @@
 package wipro;
+
 import java.util.Scanner;
+
 public class String1 {
 	public static boolean isPalindrome (String str) {
 		int length = str.length();
