@@ -1,0 +1,386 @@
+1. Bucket Fill
+Digital graphics tools often make available a "bucket fill" tool that will only paint adjacent cells . In one fill, a modified bucket tool recolors adjacent cells (connected horizontally or vertically but not diagonally) that have the same color. Given a picture represented as a 2-dimensional array of letters representing colors, find the minimum number of fills to completely repaint the picture.
+
+ 
+Example
+
+picture= ["aabba", "aabba", "aaacb"]
+
+ 
+
+Each string represents a row of the picture and each letter represents a cell's color. The diagram below shows the 5 fills needed to repaint the picture. It takes two fills each for a and b, and one for c. The array picture is shown below.
+
+ 
+
+
+
+Function Description
+
+Complete the function strokesRequired in the editor below.
+
+ 
+
+strokesRequired has the following parameter(s):
+
+    string picture[h]:  an array of strings where each string represents one row of the picture to be painted
+
+Output:
+
+    int: the minimum number of fills required to repaint the picture
+
+ 
+
+Constraints
+
+h and w refer to height and width of the graph.
+1 ≤ h ≤ 105
+1 ≤ w ≤ 105
+1 ≤ h*w ≤ 105
+length(picture[i]) = w (where 0 ≤ i < h)
+picture[i][j] is in the set  {'a', 'b', 'c'} (where 0 ≤ i < h and 0 ≤ j < w)
+ 
+
+Input Format For Custom Testing
+The first line contains an integer, h, that denotes the height of the picture and the number of elements in picture.
+
+Each line i of the h subsequent lines (where 0 ≤ i < h) contains a string that describes picture[i].
+
+Sample Case 0
+Sample Input For Custom Testing
+
+STDIN     Function 
+-----     --------
+3     →   picture[] size h = 3
+aaaba →   picture = [ "aaaba" , "ababa" , "aaaca" ] 
+ababa
+aaaca
+Sample Output
+
+5
+Explanation
+
+
+
+Letter a takes 2 fills, b takes 2 fills and c takes 1 fill for a total of 5.
+
+Sample Case 1
+Sample Input For Custom Testing
+
+STDIN     Function
+-----     --------
+4     →   picture[] size h = 4
+bbba  →   picture = [ "bbba", "abba", "acaa" , "aaac" ] 
+abba
+acaa
+aaac
+Sample Output
+
+4
+Explanation
+
+
+
+Letters a and b each take 1 fill and letter c takes 2 fills.
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+2. Keyboard
+Each day, to enter their building, employees of an e-commerce company have to type a string of numbers into a console using a 3 × 3 numeric keypad. Every day, the numbers on the keypad are mixed up.
+
+ 
+
+Use the following rules to calculate the total amount of time it takes to type a string:
+
+It takes 0 seconds to move their finger to the first key, and it takes 0 seconds to press the key where their finger is located any number of times.
+They can move their finger from one location to any adjacent key in one second.  Adjacent keys include those on a diagonal.
+Moving to a non-adjacent key is done as a series of moves to adjacent keys.
+ 
+
+Example
+
+
+This diagram depicts the minimum amount of time it takes to move from the current location to all other locations on the keypad.
+
+ 
+
+Function Description 
+
+Complete the function entryTime in the editor below.
+
+ 
+
+entryTime has the following parameter(s):
+
+    string s: the string to type
+
+    string keypad: a string of 9 digits where each group of 3 digits represents a row on the keypad of the day, in order
+
+Returns:
+
+     int : integer denoting the minimum amount of time it takes to type the string s.
+
+ 
+
+Constraints
+
+1 ≤ |s| ≤ 105
+|keypad| = 9
+keypad[i] ∈ [1-9]
+ 
+
+Input Format for Custom Testing
+Input from stdin will be processed as follows and passed to the function.
+
+ 
+
+The first line contains a string s.
+
+The next line contains a string keypad.
+
+ 
+
+Sample Case 0
+Sample Input 0
+
+STDIN          Function Parameters
+-----          -------------------
+423692    →    string s = "423692"
+923857614 →    string keypad = "923857614"
+ 
+
+Sample Output 0
+
+8
+ 
+
+Explanation 0
+
+The keypad looks like this:
+
+ 
+
+
+
+Calculate the time it takes to type s = 423692 as follows:
+
+4: Start here, so it takes 0 seconds.
+2: It takes 2 seconds to move from 4 → 2
+3: It takes 1 second to move from 2 → 3
+6: It takes 2 seconds to move from 3 → 6
+9: It takes 2 seconds to move from 6 → 9
+2: It takes 1 second to move from 9 → 2
+The total time is 2 + 1 + 2 + 2 + 1 = 8.
+
+ 
+
+Sample Case 1
+Sample Input 1
+
+STDIN         Function Parameters
+-----         -------------------
+5111      →   string s = "5111"
+752961348 →   string keypad = "752961348"
+ 
+
+Sample Output 1
+
+1
+ 
+
+Explanation 1
+
+The keypad looks like this:
+
+ 
+
+
+
+Calculate the time it takes to type s = 5111 as follows:
+
+5: Start here, so it takes 0 seconds and totalTime = 0.
+1: It takes 1 seconds to move from 5 → 1
+1: It takes 0 seconds to move from 1 → 1
+1: It takes 0 seconds to move from 1 → 1
+The total time is 1.
+
+ 
+
+Sample Case 2
+Sample Input 2
+
+STDIN         Function Parameters
+-----         -------------------
+91566165  →   string s = "91566165"
+639485712 →   string keypad = "639485712"
+ 
+
+Sample Output 2
+
+11
+ 
+
+Explanation 2
+
+The keypad looks like this:
+
+ 
+
+
+
+Calculate the time it takes to type s = 91566165 as follows:
+
+9: Start here, so it takes 0 seconds.
+1: It takes 2 seconds to move from 9 → 1
+5: It takes 1 second to move from 1 → 5
+6: It takes 2 seconds to move from 5 → 6
+6: It takes 0 seconds to move from 6 → 6
+1: It takes 2 seconds to move from 6 → 1
+6: It takes 2 seconds to move from 1 → 6
+5: It takes 2 seconds to move from 6 → 5,
+The total time is 2 + 1 + 2 + 0 + 2 + 2 + 2 = 11
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+3. Alphabetically Smallest String Builder
+Given a list of strings, concatenate those strings into the alphabetically smallest string possible.
+
+ 
+
+Example
+
+substrings = ['a','bd','ac','cd']
+
+ 
+
+Return 'aacbdcd'.
+
+ 
+
+Example
+
+substrings = ['c', 'cc', 'cca', 'cccb']
+
+ 
+
+Return 'ccacccbccc'.
+
+ 
+
+Function Description
+
+Complete the function smallestString in the editor below.
+
+ 
+
+smallestString has the following parameter(s):
+
+    string substrings[n]:  an array of strings
+
+ 
+
+Returns:
+
+    string: the alphabetically smallest string formed by the concatenation of all elements of substrings
+
+ 
+
+Constraints
+
+1 ≤ n ≤ 3500
+1 ≤ length of substrings[i] ≤ 1000
+Each substrings[i] is composed of lowercase letters only, ascii[a-z].
+ 
+
+Input Format for Custom Testing
+Input from stdin will be processed as follows and passed to the function.
+
+ 
+
+The first line contains an integer n, the size of the array substrings.
+
+Each of the next n lines contains a string substrings[i].
+
+ 
+
+Sample Case 0
+Sample Input 
+
+STDIN     Function
+-----     -----
+3      →  substrings[] size n = 3
+a      →  substrings = ['a', 'bc', 'ad']
+bc
+ad
+ 
+
+Sample Output
+
+aadbc
+ 
+
+Explanation
+
+The strings that can be created in lexicographical order are are 'aadbc', 'abcad', 'adabc', 'adbca', 'bcaad', 'bcada'. The smallest is 'aadbc'.
+
+ 
+
+Sample Case 1
+Sample Input
+
+STDIN     Function
+-----     -----
+3      →  substrings[] size n = 3
+abc    →  substrings = ['abc', 'ab', 'bc']
+ab
+bc
+ 
+
+Sample Output
+
+ababcbc
+ 
+
+Explanation
+
+The lexicographically smallest string is 'ababcbc'.
+
+Sample Case 2
+Sample Input
+
+STDIN     Function
+-----     -----
+3     →  substrings[] size n = 3
+dd    →  substrings = ['dd', 'dda', 'ddb']
+dda
+ddb
+ 
+
+Sample Output
+
+ddaddbdd
+ 
+
+Explanation
+
+The lexicographically smallest string is 'ddaddbdd'.
