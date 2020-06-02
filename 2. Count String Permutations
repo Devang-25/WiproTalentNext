@@ -1,0 +1,156 @@
+Find the number of strings of a given length that can be formed under the following rules:
+
+Each letter is a vowel, that is, it is in the set {a, e, i, o, u}.
+The letter a may only be followed by the letter e.
+An e may only be followed by an a or an i.
+An i may not be next to another i.
+The letter o may only be followed by an i or a u.
+The letter u may only be followed by an a.
+
+Example
+
+To illustrate some of the rules, start with the string s = 'a' and build to the right.
+
+'a' may only be followed by 'e', so the new string can be 'ae'.
+'ae' may only be followed by 'a' or 'i', so the new string can be 'aea' or 'aei'.
+'aea' must be 'aeae' next, and 'aei' can be 'aeia', 'aeie', 'aeio', or 'aeiu' because an 'i' cannot follow another 'i'.
+
+Analyses of lengths of strings up to 3 are in the samples below. Since the number of permutations might be very large, return the value modulo (109 + 7).
+
+Function Description
+
+Complete the countPerms function in the editor below.
+
+countPerms has the following parameter(s):
+
+    int n:  the length of string to analyze
+
+Returns:
+
+    int: the number of permutations, modulo (109 + 7)
+
+Constraints
+
+0 < n < 105
+Input Format For Custom Testing
+Input from stdin will be processed as follows and passed to the function.
+
+The only line contains an integer, n, the length of the string to analyze.
+
+Sample Case 0
+Sample Input
+
+STDIN     Function
+-----     -----
+1      →  length of string to analyze n = 1
+
+Sample Output
+
+5
+
+Explanation
+
+There are 5 strings of length 1, each containing a single vowel. 
+
+5 mod (109+7) = 5.
+
+Sample Case 1
+Sample Input
+
+STDIN     Function
+-----     -----
+2      →  length of string to analyze n = 2
+ 
+Sample Output
+
+10
+
+Explanation
+
+There are 10 strings of length 2: {'io', 'iu', 'oi', 'ou', 'ua', 'ae', 'ea', 'ei', 'ia', 'ie'}. 
+
+10 mod (109+7) = 10
+
+Sample Case 2
+Sample Input
+
+STDIN     Function
+-----     -----
+3      →  length of string to analyze n = 3
+
+Sample Output
+
+19
+ 
+Explanation
+
+There are 19 strings of length 3: {'iua', 'oia', 'oie', 'oio', 'oiu', 'oua', 'uae', 'aea', 'aei', 'eae', 'eia', 'eie', 'eio', 'eiu', 'iae', 'iea', 'iei', 'ioi', 'iou'}. 
+19 mod (109+7) = 19
+
+
+
+
+
+
+
+
+
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+
+class Result {
+
+    /*
+     * Complete the 'countPerms' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts INTEGER n as parameter.
+     */
+
+    public static int countPerms(int n) {
+    // Write your code here
+    int mod = 1000000007; //Math.pow(10.0,9)+7;
+    if(n==1)return 5;
+    long result=0;
+    long dp[][]=new long[n][5];
+    for(int i=0;i<5;i++)
+        dp[n-1][i]=1;
+    for(int i=n-2;i>=0;i--){
+        dp[i][0] = (dp[i+1][1]);
+        dp[i][1] = (dp[i+1][0]+dp[i+1][2])%mod;
+        dp[i][2] = (dp[i+1][0]+dp[i+1][1]+dp[i+1][3]+dp[i+1][4])%mod;
+        dp[i][3] = (dp[i+1][2]+dp[i+1][4])%mod;
+        dp[i][4] = (dp[i+1][0]);
+    }
+    for(int i=0;i<5;i++)result+=dp[0][i];
+    return (int)(result%mod);
+    }
+
+}
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+        int result = Result.countPerms(n);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
